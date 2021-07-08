@@ -6,7 +6,7 @@ import axios from 'axios';
     https://api.github.com/users/<your name>
 */
 
-axios.get(`https://api.github.com/users/kennymiesner`)
+// axios.get(`https://api.github.com/users/kennymiesner`)
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -16,45 +16,58 @@ axios.get(`https://api.github.com/users/kennymiesner`)
     Skip to STEP 3.
 */
 
-const kennymiesner = {
-  "login": "kennymiesner",
-  "id": 84544990,
-  "node_id": "MDQ6VXNlcjg0NTQ0OTkw",
-  "avatar_url": "https://avatars.githubusercontent.com/u/84544990?v=4",
-  "gravatar_id": "",
-  "url": "https://api.github.com/users/kennymiesner",
-  "html_url": "https://github.com/kennymiesner",
-  "followers_url": "https://api.github.com/users/kennymiesner/followers",
-  "following_url": "https://api.github.com/users/kennymiesner/following{/other_user}",
-  "gists_url": "https://api.github.com/users/kennymiesner/gists{/gist_id}",
-  "starred_url": "https://api.github.com/users/kennymiesner/starred{/owner}{/repo}",
-  "subscriptions_url": "https://api.github.com/users/kennymiesner/subscriptions",
-  "organizations_url": "https://api.github.com/users/kennymiesner/orgs",
-  "repos_url": "https://api.github.com/users/kennymiesner/repos",
-  "events_url": "https://api.github.com/users/kennymiesner/events{/privacy}",
-  "received_events_url": "https://api.github.com/users/kennymiesner/received_events",
-  "type": "User",
-  "site_admin": false,
-  "name": "Kenny Miesner",
-  "company": null,
-  "blog": "",
-  "location": "Des Moines, IA",
-  "email": null,
-  "hireable": null,
-  "bio": null,
-  "twitter_username": null,
-  "public_repos": 23,
-  "public_gists": 0,
-  "followers": 0,
-  "following": 0,
-  "created_at": "2021-05-20T21:30:20Z",
-  "updated_at": "2021-06-20T16:39:55Z"
-}
+// {
+//   "login": "kennymiesner",
+//   "id": 84544990,
+//   "node_id": "MDQ6VXNlcjg0NTQ0OTkw",
+//   "avatar_url": "https://avatars.githubusercontent.com/u/84544990?v=4",
+//   "gravatar_id": "",
+//   "url": "https://api.github.com/users/kennymiesner",
+//   "html_url": "https://github.com/kennymiesner",
+//   "followers_url": "https://api.github.com/users/kennymiesner/followers",
+//   "following_url": "https://api.github.com/users/kennymiesner/following{/other_user}",
+//   "gists_url": "https://api.github.com/users/kennymiesner/gists{/gist_id}",
+//   "starred_url": "https://api.github.com/users/kennymiesner/starred{/owner}{/repo}",
+//   "subscriptions_url": "https://api.github.com/users/kennymiesner/subscriptions",
+//   "organizations_url": "https://api.github.com/users/kennymiesner/orgs",
+//   "repos_url": "https://api.github.com/users/kennymiesner/repos",
+//   "events_url": "https://api.github.com/users/kennymiesner/events{/privacy}",
+//   "received_events_url": "https://api.github.com/users/kennymiesner/received_events",
+//   "type": "User",
+//   "site_admin": false,
+//   "name": "Kenny Miesner",
+//   "company": null,
+//   "blog": "",
+//   "location": "Des Moines, IA",
+//   "email": null,
+//   "hireable": null,
+//   "bio": null,
+//   "twitter_username": null,
+//   "public_repos": 23,
+//   "public_gists": 0,
+//   "followers": 0,
+//   "following": 0,
+//   "created_at": "2021-05-20T21:30:20Z",
+//   "updated_at": "2021-06-20T16:39:55Z"
+// }
 
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+
+const cards = document.querySelector('.cards')
+
+axios.get(`https://api.github.com/users/kennymiesner`)
+  .then(response => {
+    const card = createCard(obj)
+    cards.appendChild(card)
+  })
+  .catch(err => console.log(err.message))
+  .finally(() => console.log('done'))
+
+// cards.appendChild(createCard(kennymiesner))
+
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -118,6 +131,16 @@ function createCard(obj) {
   cardInfo.appendChild(followers)
   cardInfo.appendChild(following)
   cardInfo.appendChild(bio)
+
+  img.src = obj.avatar_url
+  h3.textContent = obj.name
+  username.textContent = obj.login
+  location.textContent = `Location: ${obj.location}`
+  profileLink.href = obj.html_url
+  profileLink.textContent = `Profile: ${obj.html_url}`
+  followers.textContent = `Followers: ${obj.followers}`
+  following.textContent = `Following: ${obj.following}`
+  bio.textContent = `Bio: ${obj.bio}`
 
   return card
 
