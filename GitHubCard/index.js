@@ -56,17 +56,12 @@ import axios from 'axios';
     and append the returned markup to the DOM as a child of .cards
 */
 
-const cards = document.querySelector('.cards')
-
 axios.get(`https://api.github.com/users/kennymiesner`)
-  .then(response => {
-    const card = createCard(obj)
-    cards.appendChild(card)
+  .then(res => {
+    document.querySelector(".cards").appendChild(createCard(res.data));
   })
   .catch(err => console.log(err.message))
-  .finally(() => console.log('done'))
-
-// cards.appendChild(createCard(kennymiesner))
+  .finally(() => console.log('Done'))
 
 
 /*
@@ -105,7 +100,7 @@ const followersArray = [];
 function createCard(obj) {
 
   const card = document.createElement('div')
-  const img = document.createElement('img')
+  const avatar = document.createElement('img')
   const cardInfo = document.createElement('div')
   const h3 = document.createElement('h3')
   const username = document.createElement('p')
@@ -121,7 +116,7 @@ function createCard(obj) {
   h3.classList.add('name')
   username.classList.add('username')
 
-  card.appendChild(img)
+  card.appendChild(avatar)
   card.appendChild(cardInfo)
   cardInfo.appendChild(h3)
   cardInfo.appendChild(username)
@@ -132,7 +127,7 @@ function createCard(obj) {
   cardInfo.appendChild(following)
   cardInfo.appendChild(bio)
 
-  img.src = obj.avatar_url
+  avatar.src = obj.avatar_url
   h3.textContent = obj.name
   username.textContent = obj.login
   location.textContent = `Location: ${obj.location}`
