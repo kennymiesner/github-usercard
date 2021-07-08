@@ -6,6 +6,8 @@ import axios from 'axios';
     https://api.github.com/users/<your name>
 */
 
+axios.get(`https://api.github.com/users/kennymiesner`)
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -13,6 +15,41 @@ import axios from 'axios';
 
     Skip to STEP 3.
 */
+
+const kennymiesner = {
+  "login": "kennymiesner",
+  "id": 84544990,
+  "node_id": "MDQ6VXNlcjg0NTQ0OTkw",
+  "avatar_url": "https://avatars.githubusercontent.com/u/84544990?v=4",
+  "gravatar_id": "",
+  "url": "https://api.github.com/users/kennymiesner",
+  "html_url": "https://github.com/kennymiesner",
+  "followers_url": "https://api.github.com/users/kennymiesner/followers",
+  "following_url": "https://api.github.com/users/kennymiesner/following{/other_user}",
+  "gists_url": "https://api.github.com/users/kennymiesner/gists{/gist_id}",
+  "starred_url": "https://api.github.com/users/kennymiesner/starred{/owner}{/repo}",
+  "subscriptions_url": "https://api.github.com/users/kennymiesner/subscriptions",
+  "organizations_url": "https://api.github.com/users/kennymiesner/orgs",
+  "repos_url": "https://api.github.com/users/kennymiesner/repos",
+  "events_url": "https://api.github.com/users/kennymiesner/events{/privacy}",
+  "received_events_url": "https://api.github.com/users/kennymiesner/received_events",
+  "type": "User",
+  "site_admin": false,
+  "name": "Kenny Miesner",
+  "company": null,
+  "blog": "",
+  "location": "Des Moines, IA",
+  "email": null,
+  "hireable": null,
+  "bio": null,
+  "twitter_username": null,
+  "public_repos": 23,
+  "public_gists": 0,
+  "followers": 0,
+  "following": 0,
+  "created_at": "2021-05-20T21:30:20Z",
+  "updated_at": "2021-06-20T16:39:55Z"
+}
 
 /*
   STEP 4: Pass the data received from Github into your function,
@@ -51,6 +88,40 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function createCard(obj) {
+
+  const card = document.createElement('div')
+  const img = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const h3 = document.createElement('h3')
+  const username = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const profileLink = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  h3.classList.add('name')
+  username.classList.add('username')
+
+  card.appendChild(img)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(h3)
+  cardInfo.appendChild(username)
+  cardInfo.appendChild(location)
+  cardInfo.appendChild(profile)
+  profile.appendChild(profileLink)
+  cardInfo.appendChild(followers)
+  cardInfo.appendChild(following)
+  cardInfo.appendChild(bio)
+
+  return card
+
+}
 
 /*
   List of LS Instructors Github username's:
